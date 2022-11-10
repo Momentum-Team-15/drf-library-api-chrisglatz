@@ -29,11 +29,11 @@ class Book(models.Model):
 
 class Note(models.Model):
     user = models.ForeignKey(
-        AbstractUser, on_delete=models.CASCADE, related_name='notes')
+        User, on_delete=models.CASCADE, related_name='notes')
     book = models.ForeignKey(
         Book, on_delete=models.CASCADE, related_name='notes')
     date_created = models.DateTimeField(auto_now_add=True)
-    title = models.Charfield(max_length=50)
+    title = models.CharField(max_length=50)
     notes = models.TextField(max_length=250)
 
     def __str__(self):
