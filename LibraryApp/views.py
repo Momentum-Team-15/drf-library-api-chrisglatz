@@ -36,7 +36,7 @@ class featured_list(generics.ListAPIView):
 
 
 class book_detail(generics.RetrieveAPIView):
-    queryset = Book.objects.All()
+    queryset = Book.objects.all()
     serializer_class = BookSerializer
 
 

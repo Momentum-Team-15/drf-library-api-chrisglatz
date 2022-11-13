@@ -16,7 +16,7 @@ class Book(models.Model):
     genre = models.CharField(max_length=50)
     pubdate = models.DateField()
     is_featured = models.BooleanField(default=False)
-    user = models.ForeignKey(User, related_name="books", null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="books", null=True, blank=True)
 
     class Meta:
         constraints = [
