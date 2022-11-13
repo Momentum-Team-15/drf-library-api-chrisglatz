@@ -12,3 +12,5 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ['user', 'book', 'date_created', 'title', 'notes']
+
+

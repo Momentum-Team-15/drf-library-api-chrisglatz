@@ -8,7 +8,7 @@ from .models import Book, Note
 from .serializers import BookSerializer, NoteSerializer
 
 
-class book_list(APIView):
+class book_list(generics.ListCreateAPIView):
     def get(self, request, format=None):
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
@@ -24,6 +24,14 @@ class note_list(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Note.objects.filter(user=self.request.user)
+        return queryset
+
+class featured_list(generics.ListAPIView)
+    queryset = Book.objects.filter(is_featured=True)
+    serializer_class = Bookserializer
+
+    def get_queryset(self):
+        queryset = Book.objects.filter(is_featured=True)
         return queryset
 
 

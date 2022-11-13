@@ -15,12 +15,13 @@ class Book(models.Model):
     author = models.CharField(max_length=50)
     genre = models.CharField(max_length=50)
     pubdate = models.DateField()
-    is_featured = models.BooleanField()
+    is_featured = models.BooleanField(default=False)
+    user = models.ForeignKey(User, related_name="books", null=True, blank=True)
 
     class Meta:
         constraints = [
             UniqueConstraint(fields=['title', 'author'],
-                             name='unique_constraint')
+                             name='unique_book_author')
         ]
 
     def __str__(self):
@@ -33,8 +34,8 @@ class Note(models.Model):
     book = models.ForeignKey(
         Book, on_delete=models.CASCADE, related_name='notes')
     date_created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=50)
-    notes = models.TextField(max_length=250)
+    note_title = models.CharField(max_length=50)
+    entry = models.TextField(max_length=250)
 
     def __str__(self):
         return self.title
