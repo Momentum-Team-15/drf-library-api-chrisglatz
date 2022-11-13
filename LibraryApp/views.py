@@ -1,5 +1,4 @@
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework import generics
@@ -26,13 +25,19 @@ class note_list(generics.ListCreateAPIView):
         queryset = Note.objects.filter(user=self.request.user)
         return queryset
 
-class featured_list(generics.ListAPIView)
+
+class featured_list(generics.ListAPIView):
     queryset = Book.objects.filter(is_featured=True)
-    serializer_class = Bookserializer
+    serializer_class = BookSerializer
 
     def get_queryset(self):
         queryset = Book.objects.filter(is_featured=True)
         return queryset
+
+
+class book_detail(generics.RetrieveAPIView):
+    queryset = Book.objects.All()
+    serializer_class = BookSerializer
 
 
 @api_view(['GET'])
